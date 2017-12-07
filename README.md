@@ -11,7 +11,7 @@ When params property is undefined it will not be serialized.
 
 ## Install
 
-npm install @adc/json-rpc
+npm install @adt/json-rpc
 
 ## Why i should use Json-RPC?
 
