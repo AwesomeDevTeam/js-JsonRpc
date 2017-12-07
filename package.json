@@ -1,0 +1,26 @@
+{
+  "name": "@adt/json-rpc",
+  "version": "0.0.1-SNAPSHOT.6",
+  "license" : "MIT",
+  "main": "dist/JsonRpc.cjs.js",
+  "module": "dist/JsonRpc.esm.js",
+  "browser": "dist/JsonRpc.umd.js",
+  "devDependencies": {
+    "eslint": "^4.12.1",
+    "jasmine": "^2.8.0",
+    "rollup": "^0.50.0"
+  },
+  "scripts": {
+    "test": "jasmine",
+    "build": "rollup -c",
+    "eslint" : "eslint src/*",
+    "prebuild" : "npm run eslint",
+    "pretest" : "npm run build"
+
+  },
+  "files": [
+    "CHANGELOG.md",
+    "README.md",
+    "dist"
+  ]
+}
