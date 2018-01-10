@@ -1,6 +1,7 @@
 import JsonRpcElement from "./JsonRpcElement";
 import { validateParams, validateMethod, validateArguments } from "./validators";
 import { copyParams } from "./helpers";
+import UUID from "./UUID";
 
 /**
  * JSON-RPC Request
@@ -20,8 +21,7 @@ export default function JsonRpcRequest(o) {
     validateParams(o.params);
     const params = copyParams(o.params);
 
-    //this.id = "id" in o ? o.id : UUID.randomUUID().serialize();
-    const id = "id" in o ? o.id : 1;
+    const id = "id" in o ? o.id : UUID.randomUUID();
 
     return Object.freeze(Object.create(JsonRpcRequest.prototype,/** @lends JsonRpcRequest.prototype */ {
 

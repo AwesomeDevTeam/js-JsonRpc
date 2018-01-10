@@ -1,6 +1,6 @@
 {
   "name": "@adt/json-rpc",
-  "version": "0.0.1-SNAPSHOT.12",
+  "version": "0.0.1-SNAPSHOT.13",
   "license" : "MIT",
   "main": "dist/JsonRpc.cjs.js",
   "module": "dist/JsonRpc.esm.js",
@@ -16,7 +16,6 @@
     "eslint" : "eslint src/*",
     "prebuild" : "npm run eslint",
     "pretest" : "npm run build"
-
   },
   "publishConfig": {
     "access": "public"
