@@ -21,7 +21,7 @@ export default function JsonRpcRequest(o) {
     validateParams(o.params);
     const params = copyParams(o.params);
 
-    const id = "id" in o ? o.id : UUID.randomUUID();
+    const id = "id" in o ? o.id : UUID.randomUUID().serialize;
 
     return Object.freeze(Object.create(JsonRpcRequest.prototype,/** @lends JsonRpcRequest.prototype */ {
 
