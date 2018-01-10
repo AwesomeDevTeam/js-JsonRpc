@@ -1,4 +1,5 @@
 const JsonRpcElement = require("../dist/JsonRpc.cjs").JsonRpcElement;
+const JsonRpcEvent = require("../dist/JsonRpc.cjs").JsonRpcEvent;
 const JsonRpcRequest = require("../dist/JsonRpc.cjs").JsonRpcRequest;
 const JsonRpcResponse = require("../dist/JsonRpc.cjs").JsonRpcResponse;
 const JsonRpcResponseResult = require("../dist/JsonRpc.cjs").JsonRpcResponseResult;
@@ -137,6 +138,24 @@ describe("JsonRpc", function() {
         expect(req.id).toEqual(0);
         expect(req.error instanceof JsonRpcError).toBe(true);
 
+
+    });
+
+    it("JsonRpcEvent constructor with params as object should be an instance of JsonRpcElement and JsonRpcEvent with properties", () => {
+
+        var evt = JsonRpcEvent({
+            method : "invoke",
+            params : {
+                value : 1
+            },
+            id: 0
+        });
+
+        expect(evt instanceof JsonRpcElement).toBe(true);
+        expect(evt instanceof JsonRpcEvent).toBe(true);
+        expect(evt.jsonrpc).toEqual("2.0");
+        expect(evt.method).toEqual("invoke");
+        expect(evt.params).toEqual({ value: 1 });
 
     });
 

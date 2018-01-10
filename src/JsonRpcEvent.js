@@ -22,7 +22,7 @@ export default function JsonRpcEvent(o) {
 
     const params = copyParams(o.params);
 
-    return Object.freeze(Object.create(JsonRpcElement.prototype, /** @lends JsonRpcEvent.prototype */ {
+    return Object.freeze(Object.create(JsonRpcEvent.prototype, /** @lends JsonRpcEvent.prototype */ {
 
         method : { value : method },
         params : { value : params },
@@ -36,3 +36,5 @@ export default function JsonRpcEvent(o) {
 
 
 }
+
+JsonRpcEvent.prototype = Object.freeze(Object.create(JsonRpcElement.prototype));
