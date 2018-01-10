@@ -27,11 +27,11 @@ export default function JsonRpcError(o) {
 
 }
 
-JsonRpcError.prototype = Object.freeze(Object.create(null,/** @lends JsonRpcError.prototype */ {
+JsonRpcError.prototype = Object.create(null,/** @lends JsonRpcError.prototype */ {
     code  : { value : 0, writable : true },
     message  : { value : "", writable : true },
     data  : { value : undefined, writable : true }
-}));
+});
 
 /**
  * Standard JSON-RPC errors
