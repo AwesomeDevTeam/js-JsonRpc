@@ -1,4 +1,4 @@
-# JsonRpc [![Build Status](https://travis-ci.org/AwesomeDevTeam/js-JsonRpc.svg?branch=master)](https://travis-ci.org/AwesomeDevTeam/js-JsonRpc)
+# JsonRpc [![npm version](https://badge.fury.io/js/%40adt%2Fjson-rpc.svg)](https://badge.fury.io/js/%40adt%2Fjson-rpc) [![Build Status](https://travis-ci.org/AwesomeDevTeam/js-JsonRpc.svg?branch=master)](https://travis-ci.org/AwesomeDevTeam/js-JsonRpc)
 
 Base JsonRpc classes.
 Represents all elements from JSON-RPC 2.0 specification http://www.jsonrpc.org/specification
