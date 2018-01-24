@@ -1,5 +1,6 @@
 // https://github.com/rollup/rollup-starter-lib/blob/master/rollup.config.js
 import pkg from './package.json';
+import babel from "rollup-plugin-babel";
 
 export default [
     // browser-friendly UMD build
@@ -10,6 +11,11 @@ export default [
             format: 'umd'
         },
         name: 'JsonRpc',
+        plugins: [
+          babel({
+              exclude: "node_modules/**"
+          })
+        ],
         noConflict : true
     },
     // CommonJS (for Node) and ES module (for bundlers) build.
