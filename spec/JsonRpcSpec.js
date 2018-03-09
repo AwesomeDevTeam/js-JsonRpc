@@ -163,5 +163,15 @@ describe("JsonRpc", function() {
     // If there was an error in detecting the id in the Request object (e.g. Parse error/Invalid Request), it MUST be Null.
     // TODO: Test for validating exception if parameters object not exists
 
+    // Parsing tests
+    it("String should be parsed as JsonRpcEvent",() => {
+
+        var strToParse = '{"jsonrpc":"2.0","method":"somethingHappens","params":{}}';
+        const parsed = JsonRpcElement.parse(strToParse);
+
+        expect(parsed instanceof JsonRpcEvent).toBe(true);
+
+    });
+
 
 });

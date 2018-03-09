@@ -30,7 +30,7 @@ export default function JsonRpcRequest(o) {
         id : { value : id },
 
         /**
-         * Serialize request to object to string
+         * Serialize request object to string
          * @return {String}
          */
         serialize : { value : function() {
