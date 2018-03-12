@@ -5,6 +5,10 @@ import JsonRpcRequest from "./JsonRpcRequest";
 import JsonRpcResponse from "./JsonRpcResponse";
 import JsonRpcResponseError from "./JsonRpcResponseError";
 import JsonRpcResponseResult from  "./JsonRpcResponseResult";
+import parse from "./JsonRpcElementStaticMethods";
+
+JsonRpcElement.parse = parse;
+JsonRpcElement.fromJson = parse;
 
 export { JsonRpcElement };
 export { JsonRpcError };

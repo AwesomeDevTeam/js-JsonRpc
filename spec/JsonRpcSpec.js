@@ -173,5 +173,34 @@ describe("JsonRpc", function() {
 
     });
 
+    it("String should be parsed as JsonRpcRequest",() => {
+
+        var strToParse = '{"jsonrpc":"2.0", "id":1,"method":"somethingHappens","params":{}}';
+        const parsed = JsonRpcElement.parse(strToParse);
+
+        expect(parsed instanceof JsonRpcRequest).toBe(true);
+
+    });
+
+    it("String should be parsed as JsonRpcResponse and JsonRpcResponseResult",() => {
+
+        var strToParse = '{"jsonrpc":"2.0","id":1,"result":"somethingHappens"}';
+        const parsed = JsonRpcElement.parse(strToParse);
+
+        expect(parsed instanceof JsonRpcResponse).toBe(true);
+        expect(parsed instanceof JsonRpcResponseResult).toBe(true);
+
+    });
+
+    it("String should be parsed as JsonRpcResponse and JsonRpcResponseError",() => {
+
+        var strToParse = '{"jsonrpc":"2.0","id":1,"error": { "code":1, "message": "Error description", "data" : {} } }';
+        const parsed = JsonRpcElement.parse(strToParse);
+
+        expect(parsed instanceof JsonRpcResponse).toBe(true);
+        expect(parsed instanceof JsonRpcResponseError).toBe(true);
+
+    });
+
 
 });
