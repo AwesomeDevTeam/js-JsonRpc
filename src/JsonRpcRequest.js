@@ -47,7 +47,12 @@ export default function JsonRpcRequest(o) {
 
             return JSON.stringify(ret);
 
-        }}
+        }},
+        toJSON: {
+            value : function() {
+                return this.serialize();
+            }
+        }
     }));
 
 }

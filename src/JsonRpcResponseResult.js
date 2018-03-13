@@ -25,7 +25,25 @@ export default function JsonRpcResponseResult(o) {
     return Object.freeze(Object.create(JsonRpcResponseResult.prototype, /** @lends JsonRpcResponseResult.prototype */ {
 
         id : { value: id },
-        result : { value: result }
+        result : { value: result },
+        /**
+         * Serialize request object to string
+         * @return {String}
+         */
+        serialize : { value : function() {
+
+            return JSON.stringify({
+                jsonrpc : this.jsonrpc,
+                id : this.id,
+                result : this.result
+            });
+
+        }},
+        toJSON: {
+            value : function() {
+                return this.serialize();
+            }
+        }
 
     }));
 

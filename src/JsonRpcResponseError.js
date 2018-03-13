@@ -23,7 +23,26 @@ export default function JsonRpcResponseError(o) {
 
     return Object.freeze(Object.create(JsonRpcResponseError.prototype, {
         id : { value : id},
-        error  : { value : error }
+        error  : { value : error },
+
+        /**
+         * Serialize request object to string
+         * @return {String}
+         */
+        serialize : { value : function() {
+
+            return JSON.stringify({
+                jsonrpc : this.jsonrpc,
+                id : this.id,
+                error : this.error
+            });
+
+        }},
+        toJSON: {
+            value : function() {
+                return this.serialize();
+            }
+        }
     }));
 }
 

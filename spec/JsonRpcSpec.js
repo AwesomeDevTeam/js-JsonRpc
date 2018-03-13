@@ -202,5 +202,66 @@ describe("JsonRpc", function() {
 
     });
 
+    // Serialization tests
+    it("Serialized JsonRpcEvent should be expected JSON string", () => {
+
+        const evt = JsonRpcEvent({
+            method: "doSth"
+        });
+
+        const serialized = evt.serialize();
+        expect(serialized).toEqual('{"jsonrpc":"2.0","method":"doSth"}');
+
+    });
+
+    it("Serialized JsonRpcRequest should be expected JSON string", () => {
+
+        const req = JsonRpcRequest({
+            id: 1,
+            method: "doSth",
+            params : {
+                param1: "param1Value"
+            }
+        });
+
+        const serialized = req.serialize();
+
+        expect(serialized).toEqual('{"jsonrpc":"2.0","id":1,"method":"doSth","params":{"param1":"param1Value"}}');
+
+
+    });
+
+    it("Serialized JsonRpcResponseError should be expected JSON string", () => {
+
+        const error = JsonRpcError({
+            code: 1,
+            message:"Error description"
+        });
+        const res = JsonRpcResponseError({
+            id: 1,
+            error
+        });
+
+        const serialized = res.serialize();
+
+        expect(serialized).toEqual('{"jsonrpc":"2.0","id":1,"error":{"code":1,"message":"Error description"}}');
+
+    });
+
+    it("Serialized JsonRpcResponseResult should be expected JSON string", () => {
+
+        const res = JsonRpcResponseResult({
+            id: 1,
+            result: {
+                value: "123"
+            }
+        });
+
+        const serialized = res.serialize();
+
+        expect(serialized).toEqual('{"jsonrpc":"2.0","id":1,"result":{"value":"123"}}');
+
+    });
+
 
 });

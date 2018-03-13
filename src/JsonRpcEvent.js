@@ -31,7 +31,12 @@ export default function JsonRpcEvent(o) {
                 method : this.method,
                 params : this.params } );
 
-        }}
+        }},
+        toJSON: {
+            value : function(){
+                return this.serialize();
+            }
+        }
     }));
 
 
