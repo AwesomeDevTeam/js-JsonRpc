@@ -8,7 +8,7 @@ import JsonRpcResponseResult from  "./JsonRpcResponseResult";
 import parse from "./JsonRpcElementStaticMethods";
 
 JsonRpcElement.parse = parse;
-JsonRpcElement.fromJson = parse;
+JsonRpcElement.fromJSON = parse;
 
 export { JsonRpcElement };
 export { JsonRpcError };
