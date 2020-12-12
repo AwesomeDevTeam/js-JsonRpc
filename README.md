@@ -12,7 +12,47 @@ When params property is undefined it will not be serialized.
 ## Install
 
 npm install @adt/json-rpc
+or
+yarn add @adt/json-rpc
+
+## Usage
+```javascrtipt
+import { JsoRpcEvent, JsonRpcRequest } from "@adt/json-rpc"
+
+const byeEvent = JsonRpcEvent({
+    method: "Bye",
+    params:{
+        name: "Joe"
+    }
+});
+
+console.log(byeEvent.serialize());
+
+const helloRequest = JsonRpcRequest({
+    method: "Hello",
+    params: {
+        name: "Joe";
+    }
+});
+
+console.log(helloRequest.serialize());
+
+const helloRequestWithExplicitId = JsonRpcRequest({
+    id: 1,
+    method: "Hello",
+    params: {
+        name: "Joe";
+    }
+});
+
+console.log(helloRequestWithExplicitId.serialize());
+
+```
+
+For more use cases please look at test specs.
 
 ## Why i should use Json-RPC?
+TODO :)
 
 ## When i can use Json-RPC?
+TODO :)

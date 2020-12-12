@@ -6,6 +6,9 @@ const JsonRpcResponseResult = require("../dist/JsonRpc.cjs").JsonRpcResponseResu
 const JsonRpcResponseError = require("../dist/JsonRpc.cjs").JsonRpcResponseError;
 const JsonRpcError = require("../dist/JsonRpc.cjs").JsonRpcError;
 
+
+const immutableObject =  (prototype,descriptor) => Object.freeze(Object.create(prototype,descriptor));
+
 // Suite
 describe("JsonRpc", function() {
 
@@ -263,5 +266,72 @@ describe("JsonRpc", function() {
 
     });
 
+
+    function CustomEvent(params) {
+        return immutableObject(CustomEvent.prototype, {
+            method: {
+                value: "CustomEvent"
+            },
+            params: {
+                value: params
+            }
+        });
+    }
+    CustomEvent.prototype = JsonRpcEvent.prototype;
+
+    const customEvent = CustomEvent({param1: "param1Value"});
+
+    it("Custom event inherited from JsonRpcEvent should be instance of JsonRpcElement, JsonRpcEvent and CustomEvent", () => {
+
+        expect(customEvent instanceof JsonRpcElement).toBe(true);
+        expect( customEvent instanceof JsonRpcEvent).toBe(true);
+        expect(customEvent instanceof CustomEvent).toBe(true);
+
+    });
+
+    it("Serialized custom event inherited from JsonRpcEvent should be expected JSON string", () => {
+
+       const serialized = customEvent.serialize();
+
+       expect(serialized).toEqual('{"jsonrpc":"2.0","method":"CustomEvent","params":{"param1":"param1Value"}}');
+
+    });
+
+    function CustomRequest({ id, params}) {
+        return immutableObject(CustomRequest.prototype,{
+            id: {
+                value: id
+            },
+            method: {
+                value: "CustomMethod"
+            },
+            params: {
+                value: params
+            }
+        });
+    }
+    CustomRequest.prototype = JsonRpcRequest.prototype;
+
+    const customRequest = CustomRequest({
+        id: 1,
+        params:{
+            param1: "param1Value"
+        }});
+
+    it("Custom request inherited from JsonRpcRequest should be instance od JsonRpcElement, JsonRpcRequest and CustomRequest", () => {
+
+        expect(customRequest instanceof JsonRpcElement).toBe(true);
+        expect(customRequest instanceof JsonRpcRequest).toBe(true);
+        expect(customRequest instanceof CustomRequest).toBe(true);
+
+    });
+
+    it("Serialized custom request inherited from JsonRpcRequest should be expected JSON string", () => {
+
+        const serialized = customRequest.serialize();
+
+        expect(serialized).toEqual('{"jsonrpc":"2.0","id":1,"method":"CustomMethod","params":{"param1":"param1Value"}}');
+
+    });
 
 });

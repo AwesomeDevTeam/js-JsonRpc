@@ -22,24 +22,26 @@ export default function JsonRpcEvent(o) {
 
     const params = copyParams(o.params);
 
-    return Object.freeze(Object.create(JsonRpcEvent.prototype, /** @lends JsonRpcEvent.prototype */ {
+    const instance = Object.create(JsonRpcEvent.prototype);
+    instance.method = method;
+    instance.params = params;
 
-        method : { value : method },
-        params : { value : params },
-        serialize : { value : function() {
-            return JSON.stringify( { jsonrpc : this.jsonrpc,
-                method : this.method,
-                params : this.params } );
-
-        }},
-        toJSON: {
-            value : function(){
-                return this.serialize();
-            }
-        }
-    }));
+    return Object.freeze(instance);
 
 
 }
 
-JsonRpcEvent.prototype = Object.freeze(Object.create(JsonRpcElement.prototype));
+JsonRpcEvent.prototype = Object.create(JsonRpcElement.prototype, /** @lends JsonRpcElement.prototype */{
+    method : { writable: true },
+    params : { writable: true },
+    serialize : { value : function() {
+        return JSON.stringify( { jsonrpc : this.jsonrpc,
+            method : this.method,
+            params : this.params } );
+    }},
+    toJSON: {
+        value : function(){
+            return this.serialize();
+        }
+    }
+});

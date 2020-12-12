@@ -23,39 +23,46 @@ export default function JsonRpcRequest(o) {
 
     const id = "id" in o ? o.id : UUID.randomUUID().serialize();
 
-    return Object.freeze(Object.create(JsonRpcRequest.prototype,/** @lends JsonRpcRequest.prototype */ {
+    //return Object.freeze(Object.create(JsonRpcRequest.prototype,));
+    const instance = Object.create(JsonRpcRequest.prototype);
+    instance.id = id;
+    instance.method = method;
+    instance.params = params;
 
-        method : { value : method },
-        params : { value : params },
-        id : { value : id },
-
-        /**
-         * Serialize request object to string
-         * @return {String}
-         */
-        serialize : { value : function() {
-
-            var ret = {
-                jsonrpc : this.jsonrpc,
-                id : this.id,
-                method : this.method
-            };
-
-            if ( typeof this.params !== "undefined" ) {
-                ret.params = this.params;
-            }
-
-            return JSON.stringify(ret);
-
-        }},
-        toJSON: {
-            value : function() {
-                return this.serialize();
-            }
-        }
-    }));
+    return Object.freeze(instance);
 
 }
 
-JsonRpcRequest.prototype = Object.freeze(Object.create(JsonRpcElement.prototype));
+JsonRpcRequest.prototype = Object.create(JsonRpcElement.prototype, /** @lends JsonRpcRequest.prototype */ {
+
+    method : { writable: true },
+    params : { writable:true },
+    id : { writable: true },
+
+    /**
+     * Serialize request object to string
+     * @return {String}
+     */
+    serialize : { value : function() {
+
+        const ret = {
+            jsonrpc : this.jsonrpc,
+            id : this.id,
+            method : this.method
+        };
+
+        if ( typeof this.params !== "undefined" ) {
+            ret.params = this.params;
+        }
+
+        return JSON.stringify(ret);
+
+    }},
+
+    toJSON: {
+        value : function() {
+            return this.serialize();
+        }
+    }
+});
 

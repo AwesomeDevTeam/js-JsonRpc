@@ -11,13 +11,8 @@ export default function JsonRpcElement() {
 
 JsonRpcElement.prototype = Object.freeze( Object.create(null, /** @lends JsonRpcElement.prototype */ {
     jsonrpc : { value : "2.0" },
-    serialize : { value : function(){
+    serialize : { value : function() {
         return JSON.stringify(this);
-    }},
-    toJSON: {
-        value : function(){
-            return this.serialize();
-        }
-    }
+    }}
 }));
 
