@@ -1,6 +1,6 @@
 {
   "name": "@adt/json-rpc",
-  "version": "0.0.1-SNAPSHOT.25",
+  "version": "0.0.1-SNAPSHOT.26",
   "license": "MIT",
   "main": "dist/JsonRpc.cjs.js",
   "module": "dist/JsonRpc.esm.js",
